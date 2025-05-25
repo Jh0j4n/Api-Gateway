@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+    gateway:
+      routes:
+        - id: product-microservice-products
+          uri: lb://PRODUCT-MICROSERVICE
+          predicates:
+            - Path=/products
+
+        - id: product-microservice-products-wildcard
+          uri: lb://PRODUCT-MICROSERVICE
+          predicates:
+            - Path=/products/**
+
+        - id: product-microservice-product-id
+          uri: lb://PRODUCT-MICROSERVICE
+          predicates:
+            - Path=/product/{id}
+
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/login
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/register
+
+
+eureka:
+  instance:
+    instance-id: "${spring.application.name}:${random.uuid}"
