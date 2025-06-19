@@ -28,6 +28,41 @@ spring:
           predicates:
             - Path=/product/{id}
 
+        - id: booking-microservice-book
+          uri: lb://BOOKING-SERVICE
+          predicates:
+            - Path=/book
+        - id: booking-microservice-bookOrder
+          uri: lb://BOOKING-SERVICE
+          predicates:
+            - Path=/book/bookOrder
+
+        - id: payment-microservice-payment
+          uri: lb://PAYMENT-SERVICE
+          predicates:
+            - Path=/payment
+        - id: payment-microservice-Dopayment
+          uri: lb://PAYMENT-SERVICE
+          predicates:
+            - Path=/payment/doPayment
+
+        - id: notifications-microservice-api-notifications
+          uri: lb://NOTIFICATION-SERVICE
+          predicates:
+            - Path=api/notifications
+        - id: notifications-microservice-payment
+          uri: lb://NOTIFICATION-SERVICE
+          predicates:
+            - Path=/api/notifications/payment
+        - id: notifications-microservice-receipts
+          uri: lb://NOTIFICATION-SERVICE
+          predicates:
+            - Path=/api/notifications/receipts
+        - id: notifications-microservice-receipt-paymentId
+          uri: lb://NOTIFICATION-SERVICE
+          predicates:
+            - Path=/api/notifications/receipt/{paymentId}
+
 
 eureka:
   instance:
